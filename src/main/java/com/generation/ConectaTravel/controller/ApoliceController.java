@@ -87,9 +87,6 @@ public class ApoliceController {
 	            .anyMatch(destino -> destino.equalsIgnoreCase(apolice.getDestino()))
 	            ? DIARIA.multiply(BigDecimal.valueOf(1.2))
 	            : DIARIA; 
-		
-		
-		
 		return valorDiaria.multiply(BigDecimal.valueOf(dias));
 	}
 	

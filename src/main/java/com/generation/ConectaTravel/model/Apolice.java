@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "tb_apolice")
 public class Apolice{
@@ -46,7 +48,14 @@ public class Apolice{
     )
     @Column(name = "cobertura")
     private List<String> coberturas = new ArrayList<>();
+    
+    @ManyToOne
+    @JsonIgnoreProperties("apolices")
+    private Usuario usuario;
 
+    @ManyToOne
+    @JsonIgnoreProperties("apolices")
+    private Cliente cliente;
 
     public Long getId() {
         return id;
@@ -110,6 +119,22 @@ public class Apolice{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
     
