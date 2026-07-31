@@ -45,9 +45,9 @@ public class ClienteController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @GetMapping("/nome/{name}")
-    public ResponseEntity<List<Cliente>> getByName(@PathVariable String name) {
-        return ResponseEntity.ok(clienteRepository.findAllByNameContainingIgnoreCase(name));
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List<Cliente>> getByNome(@PathVariable String nome) {
+        return ResponseEntity.ok(clienteRepository.findAllByNomeContainingIgnoreCase(nome));
     }
 
     @PostMapping

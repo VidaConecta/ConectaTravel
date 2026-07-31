@@ -24,11 +24,11 @@ public class Cliente {
 
     @NotBlank(message = "O atributo nome é obrigatório!")
     @Size(min = 3, max = 100, message = "O atributo nome deve conter no mínimo 03 e no máximo 100 caracteres")
-    private String name;
+    private String nome;
 
     @NotNull(message = "A data de nascimento é obrigatória!")
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate birthDate;
+    private LocalDate dataNascimento;
 
     @NotBlank(message = "O atributo CPF/CNPJ é obrigatório!")
     @Size(min = 11, max = 18, message = "O CPF/CNPJ deve ter entre 11 e 18 caracteres")
@@ -55,20 +55,20 @@ public class Cliente {
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getNome() {
+        return this.nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public LocalDate getBirthDate() {
-        return this.birthDate;
+    public LocalDate getDataNascimento() {
+        return this.dataNascimento;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getCpfCnpj() {
