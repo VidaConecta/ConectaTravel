@@ -1,13 +1,17 @@
 package com.generation.ConectaTravel.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -42,6 +46,10 @@ public class Cliente {
     @NotBlank(message = "O atributo empresaTech é obrigatório!")
     @Size(min = 2, max = 100, message = "O nome da Empresa Tech deve conter no mínimo 02 e no máximo 100 caracteres")
     private String empresaTech;
+    
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Apolice> apolices;
+    
 
     // Construtor Padrão
     public Cliente() {}
