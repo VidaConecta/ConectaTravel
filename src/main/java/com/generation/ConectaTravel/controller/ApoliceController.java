@@ -2,7 +2,8 @@ package com.generation.ConectaTravel.controller;
 
 import java.util.List;
 import java.util.Map;
-
+import java.math.BigDecimal;
+import java.time.temporal.ChronoUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/apolices")
 @CrossOrigin(origins = " * " , allowedHeaders = "*")
 public class ApoliceController {
-	
+	private final BigDecimal DIARIA = new BigDecimal("50.00");
 	@Autowired
 	private ApoliceRepository apoliceRepository;
 	
@@ -45,6 +46,7 @@ public class ApoliceController {
 	
 	@PostMapping
     public ResponseEntity<Apolice> post(@Valid @RequestBody Apolice apolice) {
+		apolice.setValorPremio(calcularValorPremio(apolice));
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(apoliceRepository.save(apolice));
     }
@@ -65,6 +67,31 @@ public class ApoliceController {
         }
         apoliceRepository.deleteById(id);
     }
+	
+	
+	private BigDecimal calcularValorPremio(Apolice apolice) {
+		if (apolice.getDataInicio() == null || apolice.getDataFim() == null) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "As datas de início e fim são obrigatórias para calcular o valor.");
+		}
+
+		if (apolice.getDataFim().isBefore(apolice.getDataInicio())) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A data final não pode ser anterior à data inicial.");
+		}
+
+		long dias = ChronoUnit.DAYS.between(apolice.getDataInicio(), apolice.getDataFim());
+		if (dias == 0) {
+			dias = 1;
+		}
+		List<String> destinosInternacionais = List.of("Estados Unidos", "Canada");
+		BigDecimal valorDiaria = destinosInternacionais.stream()
+	            .anyMatch(destino -> destino.equalsIgnoreCase(apolice.getDestino()))
+	            ? DIARIA.multiply(BigDecimal.valueOf(1.2))
+	            : DIARIA; 
+		
+		
+		
+		return valorDiaria.multiply(BigDecimal.valueOf(dias));
+	}
 	
 	
 }

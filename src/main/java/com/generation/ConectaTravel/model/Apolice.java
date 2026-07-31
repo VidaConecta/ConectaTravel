@@ -31,7 +31,6 @@ public class Apolice{
     private LocalDate dataInicio;
     private LocalDate dataFim;
     
-    @NotNull
 	@Column(precision = 10, scale = 2)
     private BigDecimal valorPremio;
 
