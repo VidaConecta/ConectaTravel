@@ -1,15 +1,15 @@
 package com.generation.ConectaTravel.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+
 import com.generation.ConectaTravel.model.Usuario;
 
-@Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-	
-	// Consulta personalizada para buscar um usuário pelo email
-	List<Usuario> findByEmailContainingIgnoreCase(String email);
-	
+
+    List<Usuario> findByNomeContainingIgnoreCase(String nome);
+
+    Optional<Usuario> findByUsuario(String usuario);
 }
