@@ -33,6 +33,10 @@ public class Usuario {
 	@Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres") // Validação para verificar se o valor tem no mínimo 6 caracteres
 	private String senha;
 	
+	@NotBlank(message = "O cargo é obrigatório")
+	@Size(min = 3, max = 20, message = "O cargo deve ter entre 3 e 20 caracteres")
+	private String cargo;
+	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Apolice> apolices;
 	
@@ -60,6 +64,18 @@ public class Usuario {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public String getCargo() {
+		return cargo;
+	}
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+	public List<Apolice> getApolices() {
+		return apolices;
+	}
+	public void setApolices(List<Apolice> apolices) {
+		this.apolices = apolices;
 	}
 	
 }
