@@ -2,6 +2,7 @@ package com.generation.ConectaTravel.model;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,6 +29,7 @@ public class Usuario {
 	private String nome;
 
 	// Validações para o atributo usuario
+	@Schema(example = "email@email.com.br")
 	@NotBlank(message = "O Atributo Usuário é Obrigatório!")
 	@Email(message = "O Atributo Usuário deve ser um email válido!")
 	@Size(max = 255, message = "O usuario não pode ser maior do que 255 caracteres")

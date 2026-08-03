@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/apolices")
-@CrossOrigin(origins = " * " , allowedHeaders = "*")
+@CrossOrigin(origins = "*" , allowedHeaders = "*")
 public class ApoliceController {
 	private final BigDecimal DIARIA = new BigDecimal("50.00");
 	@Autowired
